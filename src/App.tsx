@@ -80,7 +80,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-slate-900 selection:bg-lime-500 selection:text-white">
+    <div className="min-h-screen w-full max-w-[100vw] overflow-x-hidden relative flex flex-col bg-white text-slate-900 selection:bg-lime-500 selection:text-white">
       
       {/* 0. Cinematic Animated Intro Splash (Shop Name, Sparks & Colorful Energy) */}
       <CinematicIntro
@@ -103,7 +103,7 @@ export const App: React.FC = () => {
       />
 
       {/* Main Content Sections */}
-      <main className="flex-1">
+      <main className="flex-1 w-full max-w-full overflow-x-hidden">
         {/* 1. Hero Section */}
         <Hero
           onExploreClick={() => handleSelectCategory('all')}

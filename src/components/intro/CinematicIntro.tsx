@@ -103,7 +103,7 @@ export const CinematicIntro: React.FC<CinematicIntroProps> = ({ onComplete, isOp
       </div>
 
       {/* Main Content Container */}
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center flex flex-col items-center justify-center">
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-3 sm:px-6 py-4 sm:py-6 text-center flex flex-col items-center justify-center overflow-hidden">
         
         {/* Top Pre-badge with Lime Energy Rings */}
         <div 
@@ -111,39 +111,39 @@ export const CinematicIntro: React.FC<CinematicIntroProps> = ({ onComplete, isOp
             animationStep >= 1 ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 -translate-y-6 scale-90'
           }`}
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-lime-500/40 text-lime-300 text-xs sm:text-sm font-bold shadow-[0_0_25px_rgba(132,204,22,0.3)] backdrop-blur-md mb-6">
-            <span className="relative flex h-2.5 w-2.5">
+          <div className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-slate-900/90 border border-lime-500/40 text-lime-300 text-[10px] sm:text-xs font-bold shadow-[0_0_25px_rgba(132,204,22,0.3)] backdrop-blur-md mb-4 sm:mb-6 max-w-full flex-wrap">
+            <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-lime-500"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-lime-500"></span>
             </span>
-            <span className="tracking-widest uppercase text-[11px] sm:text-xs font-black bg-gradient-to-r from-lime-300 via-white to-emerald-300 bg-clip-text text-transparent">
+            <span className="tracking-wider sm:tracking-widest uppercase text-[10px] sm:text-xs font-black bg-gradient-to-r from-lime-300 via-white to-emerald-300 bg-clip-text text-transparent">
               LIVE DIGITAL SHOWROOM • SANGIVALASA
             </span>
-            <Sparkles className="w-3.5 h-3.5 text-lime-400 animate-spin" style={{ animationDuration: '4s' }} />
+            <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-lime-400 animate-spin shrink-0" style={{ animationDuration: '4s' }} />
           </div>
         </div>
 
-        {/* Cinematic Animated Shop Name in Vibrant Lime & White */}
+        {/* Cinematic Animated Shop Name in Vibrant Lime & White (100% Fluid Responsive) */}
         <div 
-          className={`space-y-2 sm:space-y-3 transition-all duration-1000 transform ${
+          className={`space-y-1 sm:space-y-3 transition-all duration-1000 transform max-w-full w-full px-2 ${
             animationStep >= 2 ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-8'
           }`}
         >
           {/* Top Line: VIJAYA LAKSHMI */}
-          <div className="relative inline-block">
-            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-none text-transparent bg-clip-text bg-gradient-to-r from-white via-lime-300 to-emerald-400 animate-gradient-x drop-shadow-[0_0_35px_rgba(132,204,22,0.45)]">
+          <div className="relative inline-block max-w-full">
+            <h1 className="text-3xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-tight sm:leading-none text-transparent bg-clip-text bg-gradient-to-r from-white via-lime-300 to-white animate-gradient-x drop-shadow-[0_0_35px_rgba(163,230,53,0.6)] break-words">
               VIJAYA LAKSHMI
             </h1>
             {/* Glowing underline aura */}
-            <div className="absolute -bottom-1 left-0 right-0 h-1 bg-gradient-to-r from-lime-400 via-emerald-400 to-teal-400 rounded-full blur-[2px] opacity-80" />
+            <div className="absolute -bottom-1.5 sm:-bottom-2 left-0 right-0 h-1 sm:h-1.5 bg-gradient-to-r from-lime-400 via-white to-lime-400 rounded-full blur-[2px] opacity-90 animate-pulse" />
           </div>
 
           {/* Bottom Line: ELECTRICALS */}
-          <div className="relative">
-            <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-lime-400 via-emerald-300 to-white drop-shadow-[0_0_30px_rgba(132,204,22,0.5)]">
+          <div className="relative mt-1 sm:mt-2 max-w-full">
+            <h2 className="text-2xl xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-wider sm:tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-lime-400 via-white to-lime-300 animate-gradient-x drop-shadow-[0_0_30px_rgba(132,204,22,0.6)] break-words">
               ELECTRICALS
             </h2>
-            <div className="text-[11px] sm:text-sm font-black tracking-[0.3em] uppercase text-lime-300/90 mt-1">
+            <div className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-0.5 sm:py-1 rounded-full bg-lime-400 text-slate-950 font-black text-[9px] sm:text-xs uppercase tracking-wider sm:tracking-widest mt-2 sm:mt-3 shadow-lg shadow-lime-400/40 border border-white/50 max-w-full">
               WHOLESALE &amp; RETAIL SHOWROOM
             </div>
           </div>
@@ -151,38 +151,38 @@ export const CinematicIntro: React.FC<CinematicIntroProps> = ({ onComplete, isOp
 
         {/* Category Pills (Animated Entrance) */}
         <div 
-          className={`grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4 mt-8 w-full max-w-2xl transition-all duration-700 transform ${
+          className={`grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3.5 mt-5 sm:mt-8 w-full max-w-xs sm:max-w-2xl px-1 sm:px-2 transition-all duration-700 transform ${
             animationStep >= 3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
         >
           {/* Electricals */}
-          <div className="group relative p-3 rounded-xl bg-slate-900/80 border border-lime-500/50 backdrop-blur-md flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(132,204,22,0.2)] hover:border-lime-400 transition-all">
-            <Zap className="w-4 h-4 text-lime-400 group-hover:scale-110 transition-transform" />
-            <span className="text-xs sm:text-sm font-bold text-white tracking-wide">Electricals</span>
+          <div className="group relative p-2 sm:p-3 rounded-xl bg-slate-900/80 border border-lime-500/50 backdrop-blur-md flex items-center justify-center gap-1.5 sm:gap-2 shadow-[0_0_15px_rgba(132,204,22,0.2)] hover:border-lime-400 transition-all">
+            <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-lime-400 group-hover:scale-110 transition-transform shrink-0" />
+            <span className="text-[11px] sm:text-sm font-bold text-white tracking-wide">Electricals</span>
           </div>
 
           {/* Plumbing */}
-          <div className="group relative p-3 rounded-xl bg-slate-900/80 border border-teal-500/50 backdrop-blur-md flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(20,184,166,0.2)] hover:border-teal-400 transition-all">
-            <Droplets className="w-4 h-4 text-teal-400 group-hover:scale-110 transition-transform" />
-            <span className="text-xs sm:text-sm font-bold text-white tracking-wide">Plumbing</span>
+          <div className="group relative p-2 sm:p-3 rounded-xl bg-slate-900/80 border border-teal-500/50 backdrop-blur-md flex items-center justify-center gap-1.5 sm:gap-2 shadow-[0_0_15px_rgba(20,184,166,0.2)] hover:border-teal-400 transition-all">
+            <Droplets className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-teal-400 group-hover:scale-110 transition-transform shrink-0" />
+            <span className="text-[11px] sm:text-sm font-bold text-white tracking-wide">Plumbing</span>
           </div>
 
           {/* Sanitary */}
-          <div className="group relative p-3 rounded-xl bg-slate-900/80 border border-emerald-500/50 backdrop-blur-md flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.2)] hover:border-emerald-400 transition-all">
-            <Bath className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
-            <span className="text-xs sm:text-sm font-bold text-white tracking-wide">Sanitary</span>
+          <div className="group relative p-2 sm:p-3 rounded-xl bg-slate-900/80 border border-emerald-500/50 backdrop-blur-md flex items-center justify-center gap-1.5 sm:gap-2 shadow-[0_0_15px_rgba(16,185,129,0.2)] hover:border-emerald-400 transition-all">
+            <Bath className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 group-hover:scale-110 transition-transform shrink-0" />
+            <span className="text-[11px] sm:text-sm font-bold text-white tracking-wide">Sanitary</span>
           </div>
 
           {/* Hardware */}
-          <div className="group relative p-3 rounded-xl bg-slate-900/80 border border-amber-500/50 backdrop-blur-md flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(245,158,11,0.2)] hover:border-amber-400 transition-all">
-            <Wrench className="w-4 h-4 text-amber-400 group-hover:scale-110 transition-transform" />
-            <span className="text-xs sm:text-sm font-bold text-white tracking-wide">Hardware</span>
+          <div className="group relative p-2 sm:p-3 rounded-xl bg-slate-900/80 border border-amber-500/50 backdrop-blur-md flex items-center justify-center gap-1.5 sm:gap-2 shadow-[0_0_15px_rgba(245,158,11,0.2)] hover:border-amber-400 transition-all">
+            <Wrench className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 group-hover:scale-110 transition-transform shrink-0" />
+            <span className="text-[11px] sm:text-sm font-bold text-white tracking-wide">Hardware</span>
           </div>
         </div>
 
         {/* Brand Wall Ticker Pill */}
         <div 
-          className={`mt-6 text-xs text-slate-300 font-medium transition-all duration-700 transform ${
+          className={`mt-4 sm:mt-6 text-[10px] sm:text-xs text-slate-300 font-medium px-2 max-w-full break-words transition-all duration-700 transform ${
             animationStep >= 4 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           }`}
         >
@@ -190,7 +190,7 @@ export const CinematicIntro: React.FC<CinematicIntroProps> = ({ onComplete, isOp
         </div>
 
         {/* Animated Progress Conduit & Skip Controls */}
-        <div className="mt-10 w-full max-w-md flex flex-col items-center gap-3">
+        <div className="mt-6 sm:mt-10 w-full max-w-xs sm:max-w-md flex flex-col items-center gap-2.5 sm:gap-3 px-2">
           
           {/* Sleek Progress Bar in Lime Gradient */}
           <div className="w-full bg-slate-800/80 rounded-full h-2 overflow-hidden p-0.5 border border-slate-700/60 shadow-inner">
@@ -201,18 +201,18 @@ export const CinematicIntro: React.FC<CinematicIntroProps> = ({ onComplete, isOp
           </div>
 
           <div className="flex items-center justify-between w-full px-1 text-xs">
-            <span className="text-slate-300 font-mono text-[11px] flex items-center gap-1 font-bold">
-              <Store className="w-3.5 h-3.5 text-lime-400" />
-              <span>Loading Showroom {progress}%</span>
+            <span className="text-slate-300 font-mono text-[10px] sm:text-[11px] flex items-center gap-1 font-bold">
+              <Store className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-lime-400 shrink-0" />
+              <span>Loading {progress}%</span>
             </span>
 
             {/* Skip Button */}
             <button
               onClick={triggerExit}
-              className="inline-flex items-center gap-1.5 text-xs font-black text-slate-950 bg-lime-400 hover:bg-lime-300 px-4 py-1.5 rounded-full shadow-md shadow-lime-400/30 transition-all cursor-pointer transform hover:scale-105"
+              className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-black text-slate-950 bg-lime-400 hover:bg-lime-300 px-3.5 py-1.5 rounded-full shadow-md shadow-lime-400/30 transition-all cursor-pointer transform hover:scale-105"
             >
               <span>Enter Store</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             </button>
           </div>
 

@@ -27,15 +27,15 @@ export const AnimatedRunningBanner: React.FC<AnimatedRunningBannerProps> = ({ on
 
       <div className="max-w-7xl mx-auto px-2 sm:px-4 flex items-center justify-between relative z-10 gap-2">
         
-        {/* Left Interactive Replay Intro Button */}
+        {/* Left Interactive Replay Intro Button with White & Lime Theme */}
         <button
           onClick={onReplayIntro}
-          className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950 hover:bg-slate-900 text-lime-300 font-extrabold text-[10px] sm:text-xs shadow-sm transition-all transform hover:scale-105 cursor-pointer border border-lime-400/40"
+          className="shrink-0 inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1 rounded-full bg-white hover:bg-lime-50 text-lime-800 font-black text-[10px] sm:text-xs shadow-md border-2 border-lime-400 hover:border-lime-500 transition-all transform hover:scale-105 cursor-pointer"
           title="Watch the animated intro"
         >
-          <Play className="w-3 h-3 fill-current" />
-          <span className="hidden sm:inline">Play Animated Intro</span>
-          <span className="sm:hidden">Intro</span>
+          <Play className="w-3 h-3 fill-lime-600 text-lime-600" />
+          <span className="hidden sm:inline font-extrabold">Play Intro</span>
+          <span className="sm:hidden font-extrabold">Intro</span>
         </button>
 
         {/* Continuous Animated Running Marquee */}
@@ -44,15 +44,24 @@ export const AnimatedRunningBanner: React.FC<AnimatedRunningBannerProps> = ({ on
             {tickerItems.concat(tickerItems).map((text, idx) => (
               <span 
                 key={idx} 
-                className={`whitespace-nowrap flex items-center gap-2 ${
-                  text.includes('VIJAYA') 
-                    ? 'text-slate-950 font-black text-sm bg-white/70 px-2.5 py-0.5 rounded-full border border-slate-950/20 shadow-xs' 
-                    : text.includes('CALL') 
-                    ? 'text-slate-950 font-black underline underline-offset-2'
-                    : 'text-slate-900 font-bold'
-                }`}
+                className="whitespace-nowrap flex items-center gap-2"
               >
-                <span>{text}</span>
+                {text.includes('VIJAYA') ? (
+                  <span className="inline-flex items-center gap-2 bg-white text-slate-950 font-black text-xs sm:text-sm px-3.5 py-1 rounded-full border-2 border-lime-500 shadow-md shadow-lime-600/20 animate-pulse-lime">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-500 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-lime-600"></span>
+                    </span>
+                    <span className="text-lime-700 font-black tracking-tight">VIJAYA LAKSHMI</span>
+                    <span className="bg-lime-600 text-white px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-black tracking-wider uppercase shadow-xs">
+                      ELECTRICALS
+                    </span>
+                  </span>
+                ) : (
+                  <span className={text.includes('CALL') ? 'text-slate-950 font-black underline underline-offset-2' : 'text-slate-900 font-bold'}>
+                    {text}
+                  </span>
+                )}
                 <span className="w-1.5 h-1.5 rounded-full bg-slate-900/60 inline-block"></span>
               </span>
             ))}

@@ -313,9 +313,9 @@ export const StoreSection: React.FC<StoreSectionProps> = ({ initialProduct }) =>
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
-              <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl text-xs font-bold text-slate-800 shadow-md border border-slate-200 flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-rose-500" />
-                <span>Opp. Mudu Ammavari Temple, Sangivalasa</span>
+              <div className="absolute bottom-3 right-3 max-w-[calc(100%-1.5rem)] bg-white/95 backdrop-blur-md px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[10px] sm:text-xs font-bold text-slate-800 shadow-md border border-slate-200 flex items-center gap-1.5 truncate">
+                <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-rose-500 shrink-0" />
+                <span className="truncate">Opp. Mudu Ammavari Temple, Sangivalasa</span>
               </div>
             </div>
 
@@ -323,7 +323,7 @@ export const StoreSection: React.FC<StoreSectionProps> = ({ initialProduct }) =>
 
           {/* Right Col (5 cols): Professional Enquiry Form */}
           <div className="lg:col-span-5">
-            <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xl">
+            <div className="bg-white rounded-3xl border border-slate-200 p-4 sm:p-8 shadow-xl">
               
               <div className="flex items-center gap-2 mb-2">
                 <span className="w-8 h-8 rounded-xl bg-lime-100 border border-lime-300 text-lime-800 flex items-center justify-center">

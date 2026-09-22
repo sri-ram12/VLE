@@ -70,21 +70,21 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <>
       {/* Top micro bar for GSTIN & Local Notice */}
-      <div className="bg-slate-900 text-slate-300 text-xs py-1.5 px-4 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
-          <div className="flex items-center gap-4 flex-wrap">
-            <span className="inline-flex items-center gap-1.5 text-slate-200">
-              <MapPin className="w-3.5 h-3.5 text-lime-400" />
-              Sangivalasa, Thagarapuvalasa, Visakha Dist.
+      <div className="bg-slate-900 text-slate-300 text-[10px] sm:text-xs py-1 sm:py-1.5 px-2.5 sm:px-4 border-b border-slate-800 overflow-hidden">
+        <div className="max-w-7xl mx-auto flex flex-wrap justify-center sm:justify-between items-center gap-1.5 sm:gap-2">
+          <div className="flex items-center gap-2 sm:gap-4 flex-wrap justify-center">
+            <span className="inline-flex items-center gap-1 text-slate-200">
+              <MapPin className="w-3 h-3 text-lime-400 shrink-0" />
+              <span>Sangivalasa, Visakhapatnam</span>
             </span>
             <span className="hidden sm:inline-block text-slate-500">|</span>
             <span className="inline-flex items-center gap-1 text-slate-300 font-mono">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-              GSTIN: <span className="font-semibold text-white tracking-wider">{STORE_INFO.gstin}</span>
+              <ShieldCheck className="w-3 h-3 text-emerald-400 shrink-0" />
+              <span>GST: <strong className="text-white font-semibold">{STORE_INFO.gstin}</strong></span>
             </span>
           </div>
 
-          <div className="flex items-center gap-3 text-xs">
+          <div className="hidden sm:flex items-center gap-3 text-xs">
             <span className="bg-lime-900/60 text-lime-300 font-bold px-2 py-0.5 rounded border border-lime-700/50">
               WHOLESALE &amp; RETAIL
             </span>
@@ -103,30 +103,30 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Main Sticky Navbar */}
       <header
         className={`sticky top-0 z-40 transition-all duration-300 ${
-          isScrolled ? 'glass-nav shadow-md py-2.5' : 'bg-white/95 backdrop-blur-xl py-3 border-b border-slate-200'
+          isScrolled ? 'glass-nav shadow-md py-2' : 'bg-white/95 backdrop-blur-xl py-2 sm:py-3 border-b border-slate-200'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 flex items-center justify-between gap-2 sm:gap-4">
           
           {/* Logo & Brand Identity */}
           <a 
             href="#hero" 
-            className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-lime-500 rounded-lg p-1"
+            className="flex items-center gap-2 sm:gap-3 group focus:outline-none shrink-0"
           >
-            <div className="relative w-11 h-11 rounded-xl bg-gradient-to-br from-lime-500 via-lime-600 to-emerald-700 flex items-center justify-center text-white font-black shadow-md shadow-lime-500/25 border border-lime-400/40 group-hover:scale-105 transition-transform">
-              <span className="text-lg tracking-tighter">VL</span>
-              <span className="absolute -top-1 -right-1 w-3 h-3 bg-lime-400 rounded-full border-2 border-white animate-ping opacity-75"></span>
-              <span className="absolute -top-1 -right-1 w-3 h-3 bg-lime-400 rounded-full border-2 border-white"></span>
+            <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-gradient-to-br from-lime-500 via-lime-600 to-emerald-700 flex items-center justify-center text-white font-black shadow-md shadow-lime-500/25 border border-lime-400/40 group-hover:scale-105 transition-transform shrink-0">
+              <span className="text-base sm:text-lg tracking-tighter">VL</span>
+              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-lime-400 rounded-full border-2 border-white animate-ping opacity-75"></span>
+              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-lime-400 rounded-full border-2 border-white"></span>
             </div>
             <div className="flex flex-col">
-              <span className="text-base sm:text-lg font-black tracking-tight text-slate-900 leading-tight group-hover:text-lime-700 transition-colors uppercase">
+              <span className="text-sm sm:text-base md:text-lg font-black tracking-tight text-slate-900 leading-tight group-hover:text-lime-700 transition-colors uppercase">
                 Vijaya Lakshmi
               </span>
               <div className="flex items-center gap-1.5">
-                <span className="text-xs sm:text-xs font-extrabold tracking-widest text-lime-700 uppercase">
+                <span className="text-[10px] sm:text-xs font-extrabold tracking-wider text-lime-700 uppercase">
                   Electricals
                 </span>
-                <span className="text-[10px] text-lime-900 bg-lime-100 font-bold px-1.5 py-0.2 rounded border border-lime-300">
+                <span className="hidden md:inline-block text-[10px] text-lime-900 bg-lime-100 font-bold px-1.5 py-0.2 rounded border border-lime-300">
                   Wholesale &amp; Retail
                 </span>
               </div>
@@ -147,14 +147,14 @@ export const Navbar: React.FC<NavbarProps> = ({
           </nav>
 
           {/* Action CTAs */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
             {/* Quick Search Button */}
             <button
               onClick={onOpenSearch}
-              className="flex items-center gap-2 px-3 py-2 text-xs sm:text-sm text-slate-700 bg-slate-100 hover:bg-slate-200 hover:text-slate-900 rounded-lg border border-slate-200 transition-all cursor-pointer"
+              className="flex items-center gap-1.5 p-2 sm:px-3 sm:py-2 text-xs sm:text-sm text-slate-700 bg-slate-100 hover:bg-slate-200 hover:text-slate-900 rounded-lg border border-slate-200 transition-all cursor-pointer"
               title="Search products (wire, pipe, tap, MCB...)"
             >
-              <Search className="w-4 h-4 text-lime-700" />
+              <Search className="w-4 h-4 text-lime-700 shrink-0" />
               <span className="hidden md:inline font-semibold">Search Catalog...</span>
               <kbd className="hidden lg:inline-block px-1.5 py-0.5 text-[10px] font-semibold bg-white border border-slate-300 rounded text-slate-500 shadow-xs">
                 /
