@@ -332,6 +332,94 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick, onContactClick }) =>
               </div>
             </div>
 
+            {/* 🎬 ENTRANCE OF THE SHOP VIDEO - DIRECTLY BELOW THE SHOP NAME */}
+            <div id="tour1-entrance-video" className="w-full pt-1 pb-1">
+              <div className="flex items-center justify-between mb-2">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-lime-100 border border-lime-300 text-lime-900 text-xs font-bold uppercase tracking-wider shadow-2xs">
+                  <Video className="w-3.5 h-3.5 text-lime-700 animate-pulse" />
+                  <span>Grand Store Entrance • Tour 01</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-lime-600 animate-ping" />
+                </div>
+                <span className="text-xs text-slate-500 font-bold flex items-center gap-1">
+                  <VolumeX className="w-3.5 h-3.5 text-amber-500" />
+                  <span>Silent Video</span>
+                </span>
+              </div>
+
+              <div className="relative w-full aspect-video rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-950 border-2 border-lime-400/60 shadow-xl group flex items-center justify-center">
+                <video
+                  ref={heroVideoRef}
+                  src="/videos/vide4.mp4"
+                  className="w-full h-full object-cover cursor-pointer"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  onClick={toggleHeroVideoPlay}
+                />
+
+                {/* Top Video Overlay Bar */}
+                <div className="absolute top-2.5 left-2.5 right-2.5 sm:top-3 sm:left-3 sm:right-3 flex items-center justify-between pointer-events-none z-10">
+                  <div className="bg-slate-950/85 backdrop-blur-md px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold text-white border border-white/20 flex items-center gap-2 shadow-lg">
+                    <span className="w-2 h-2 rounded-full bg-lime-400 animate-pulse" />
+                    <span className="font-extrabold text-lime-300">Live Entrance Walkthrough</span>
+                    <span className="text-slate-300 hidden sm:inline">• Sangivalasa Storefront</span>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 pointer-events-auto">
+                    <button
+                      onClick={() => setHeroVideoFullscreen(true)}
+                      className="p-1.5 sm:px-2.5 sm:py-1 rounded-full bg-slate-950/85 hover:bg-white hover:text-slate-950 text-white transition-all cursor-pointer border border-white/20 shadow-lg backdrop-blur-md flex items-center gap-1 text-[10px] sm:text-xs font-bold"
+                      title="Expand to Fullscreen"
+                    >
+                      <Maximize2 className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline">Fullscreen</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Center Play/Pause Overlay */}
+                <button
+                  onClick={toggleHeroVideoPlay}
+                  className={`absolute inset-0 flex items-center justify-center bg-slate-950/20 transition-opacity z-10 cursor-pointer ${
+                    heroVideoPlaying ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'
+                  }`}
+                >
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-lime-500/90 text-slate-950 flex items-center justify-center shadow-2xl backdrop-blur-sm transform transition-all group-hover:scale-110">
+                    {heroVideoPlaying ? <Pause className="w-7 h-7 fill-current" /> : <Play className="w-7 h-7 fill-current ml-0.5" />}
+                  </div>
+                </button>
+
+                {/* Bottom Timeline Scrubber */}
+                <div className="absolute inset-x-0 bottom-0 pt-6 pb-2.5 px-3 sm:px-4 bg-gradient-to-t from-black/95 via-black/50 to-transparent pointer-events-auto z-10 flex flex-col gap-1">
+                  <div className="flex items-center gap-2.5 text-[11px] text-white/90 font-mono font-bold">
+                    <span className="shrink-0">{formatVideoTime(heroVideoTime)}</span>
+                    <input
+                      type="range"
+                      min="0"
+                      max={heroVideoDuration || 95}
+                      step="0.1"
+                      value={heroVideoTime}
+                      onChange={handleHeroVideoSeek}
+                      className="w-full h-1 bg-white/30 rounded-lg appearance-none cursor-pointer accent-lime-400"
+                      onClick={(e) => e.stopPropagation()}
+                    />
+                    <span className="shrink-0">{formatVideoTime(heroVideoDuration)}</span>
+                  </div>
+
+                  <div className="flex items-center justify-between text-white text-[10px] sm:text-[11px] pointer-events-none">
+                    <span className="font-semibold text-white/90 drop-shadow-sm flex items-center gap-1.5 truncate">
+                      <CheckCircle2 className="w-3 h-3 text-lime-400 shrink-0" />
+                      <span className="truncate">Opp. Mudu Ammavari Temple, Sangivalasa Main Road</span>
+                    </span>
+                    <span className="text-[9px] bg-lime-500 text-slate-950 font-black px-1.5 py-0.5 rounded shadow-sm shrink-0">
+                      1080p HD
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* Subheading */}
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
               Quality materials for homes, commercial complexes, contractors, and everyday installations. 
@@ -586,146 +674,6 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick, onContactClick }) =>
               </div>
             </div>
 
-          </div>
-
-        </div>
-
-        {/* Tour 1 Video Feature: Placed Directly Below Hero Text & Grid */}
-        <div id="tour1-entrance-video" className="mt-14 pt-10 border-t border-slate-200/80">
-          
-          {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-lime-100 border border-lime-300 text-lime-900 text-xs font-bold uppercase tracking-wider mb-2 shadow-2xs">
-                <Video className="w-3.5 h-3.5 text-lime-700 animate-pulse" />
-                <span>Tour 01 • Official Store Entrance Video</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-lime-600 animate-ping" />
-              </div>
-
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-950 tracking-tight">
-                Live Store Entrance &amp; Night Storefront Walkthrough
-              </h2>
-
-              <p className="text-slate-600 text-sm sm:text-base mt-2 max-w-3xl leading-relaxed">
-                Watch the real live video walkthrough recorded outside <strong>Vijaya Lakshmi Electricals</strong> in Sangivalasa. Inspect our glowing 3D LED storefront signs, front porch piping stock, and step through the sliding glass entrance into the main showroom floor.
-              </p>
-            </div>
-
-            <div className="flex items-center gap-2 shrink-0">
-              <span className="px-3 py-1.5 rounded-xl bg-slate-900 text-amber-300 text-xs font-bold border border-amber-400/30 flex items-center gap-1.5 shadow-sm">
-                <VolumeX className="w-4 h-4 text-amber-400" />
-                <span>Recorded Silent (No Audio)</span>
-              </span>
-            </div>
-          </div>
-
-          {/* Full Widescreen 16:9 Video Card */}
-          <div className="relative w-full aspect-video max-h-[600px] rounded-3xl overflow-hidden bg-slate-950 border-2 border-slate-200 shadow-2xl group flex items-center justify-center">
-            <video
-              ref={heroVideoRef}
-              src="/videos/vide4.mp4"
-              className="w-full h-full object-cover cursor-pointer"
-              autoPlay
-              muted
-              loop
-              playsInline
-              onClick={toggleHeroVideoPlay}
-            />
-
-            {/* Top Video Overlay Bar */}
-            <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none z-10">
-              <div className="bg-slate-950/85 backdrop-blur-md px-3.5 py-1.5 rounded-full text-xs font-bold text-white border border-white/20 flex items-center gap-2 shadow-lg">
-                <span className="w-2.5 h-2.5 rounded-full bg-lime-400 animate-pulse" />
-                <span className="font-extrabold text-lime-300">Entrance Tour 01</span>
-                <span className="text-slate-300 hidden sm:inline">• Sangivalasa Landmark</span>
-              </div>
-
-              <div className="flex items-center gap-2 pointer-events-auto">
-                <button
-                  onClick={() => setHeroVideoFullscreen(true)}
-                  className="p-2 sm:px-3 sm:py-1.5 rounded-full bg-slate-950/85 hover:bg-white hover:text-slate-950 text-white transition-all cursor-pointer border border-white/20 shadow-lg backdrop-blur-md flex items-center gap-1.5 text-xs font-bold"
-                  title="Expand to Fullscreen"
-                >
-                  <Maximize2 className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">Fullscreen</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Center Play/Pause Overlay */}
-            <button
-              onClick={toggleHeroVideoPlay}
-              className={`absolute inset-0 flex items-center justify-center bg-slate-950/20 transition-opacity z-10 cursor-pointer ${
-                heroVideoPlaying ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'
-              }`}
-            >
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-lime-500/90 text-slate-950 flex items-center justify-center shadow-2xl backdrop-blur-sm transform transition-all group-hover:scale-110">
-                {heroVideoPlaying ? <Pause className="w-8 h-8 fill-current" /> : <Play className="w-8 h-8 fill-current ml-1" />}
-              </div>
-            </button>
-
-            {/* Bottom Timeline Scrubber */}
-            <div className="absolute inset-x-0 bottom-0 pt-8 pb-3 px-4 sm:px-6 bg-gradient-to-t from-black/95 via-black/50 to-transparent pointer-events-auto z-10 flex flex-col gap-1.5">
-              <div className="flex items-center gap-3 text-xs text-white/90 font-mono font-bold">
-                <span className="shrink-0">{formatVideoTime(heroVideoTime)}</span>
-                <input
-                  type="range"
-                  min="0"
-                  max={heroVideoDuration || 95}
-                  step="0.1"
-                  value={heroVideoTime}
-                  onChange={handleHeroVideoSeek}
-                  className="w-full h-1.5 bg-white/30 rounded-lg appearance-none cursor-pointer accent-lime-400"
-                  onClick={(e) => e.stopPropagation()}
-                />
-                <span className="shrink-0">{formatVideoTime(heroVideoDuration)}</span>
-              </div>
-
-              <div className="flex items-center justify-between text-white text-xs pointer-events-none">
-                <span className="font-semibold text-white/90 drop-shadow-sm flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-lime-400 shrink-0" />
-                  <span>Illuminated Night Exterior • Opp. Mudu Ammavari Temple, Sangivalasa</span>
-                </span>
-                <span className="text-[10px] bg-lime-500 text-slate-950 font-black px-2 py-0.5 rounded shadow-sm">
-                  1080p HD Widescreen
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Quick Jump Bar below video */}
-          <div className="mt-5 flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
-            <div className="flex items-center gap-2 text-xs text-slate-600">
-              <span className="font-bold text-slate-900">Explore Other Walkthroughs:</span>
-              <button
-                onClick={() => {
-                  const el = document.querySelector('#showroom-videos');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="text-lime-700 hover:text-lime-800 font-bold underline cursor-pointer"
-              >
-                View All 4 Showroom &amp; Godown Tours ↓
-              </button>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <a
-                href={`tel:${STORE_INFO.contacts[0].phone}`}
-                className="px-4 py-2 rounded-xl bg-lime-600 hover:bg-lime-500 text-white font-bold text-xs flex items-center gap-1.5 transition-colors shadow-xs"
-              >
-                <PhoneCall className="w-3.5 h-3.5" />
-                <span>Call Store (9441160851)</span>
-              </a>
-              <a
-                href={STORE_INFO.mapUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center gap-1.5 transition-colors border border-slate-200"
-              >
-                <MapPin className="w-3.5 h-3.5 text-rose-500" />
-                <span>Get Directions</span>
-              </a>
-            </div>
           </div>
 
         </div>
