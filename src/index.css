@@ -162,3 +162,10 @@
 .animate-shine-sweep {
   animation: shineSweep 3s ease-in-out infinite;
 }
+
+/* Strictly hide browser audio/volume controls for silent videos */
+video::-webkit-media-controls-volume-control-container,
+video::-webkit-media-controls-mute-button,
+video::-webkit-media-controls-volume-slider {
+  display: none !important;
+}

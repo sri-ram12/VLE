@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   Users, 
   Building, 
@@ -6,7 +6,13 @@ import {
   ArrowRight, 
   BadgePercent, 
   ReceiptText, 
-  Clock 
+  Clock,
+  Video,
+  Play,
+  Pause,
+  Maximize2,
+  VolumeX,
+  X
 } from 'lucide-react';
 
 interface WholesaleRetailProps {
@@ -18,6 +24,22 @@ export const WholesaleRetailSection: React.FC<WholesaleRetailProps> = ({
   onBrowseRetail,
   onRequestBulk
 }) => {
+  const [wholesaleMediaMode, setWholesaleMediaMode] = useState<'photo' | 'video'>('video');
+  const [isVideoPlaying, setIsVideoPlaying] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const toggleVideoPlay = () => {
+    if (!videoRef.current) return;
+    if (videoRef.current.paused) {
+      videoRef.current.play().catch(() => {});
+      setIsVideoPlaying(true);
+    } else {
+      videoRef.current.pause();
+      setIsVideoPlaying(false);
+    }
+  };
+
   return (
     <section id="wholesale" className="py-20 bg-slate-50/80 relative overflow-hidden border-t border-slate-200 text-slate-900">
       
@@ -136,15 +158,100 @@ export const WholesaleRetailSection: React.FC<WholesaleRetailProps> = ({
                 Direct wholesale supply with tiered volume pricing, GST compliant billing, and prioritized fulfillment for construction sites across Visakha district.
               </p>
 
-              {/* Wholesale Real Yard Visual */}
-              <div className="relative aspect-16/9 rounded-2xl overflow-hidden mb-6 border border-slate-200 shadow-sm group">
-                <img
-                  src="/images/storefront/astral_tanks_sudhakar_yard.png"
-                  alt="Astral Water Tanks & Sudhakar Piping Bulk Yard"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-2 left-2 bg-emerald-700/90 backdrop-blur-xs text-white text-[10px] font-bold px-2.5 py-1 rounded-md">
-                  Astral &amp; Sudhakar Bulk Storage Yard
+              {/* Wholesale Real Stock Visual: Video vs Photo Toggle */}
+              <div className="mb-6">
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="text-xs font-bold text-slate-500">Live Inventory Verification:</span>
+                  <div className="flex bg-slate-100 p-0.5 rounded-lg border border-slate-200">
+                    <button
+                      onClick={() => setWholesaleMediaMode('video')}
+                      className={`px-2.5 py-1 rounded-md text-[11px] font-bold flex items-center gap-1 transition-all cursor-pointer ${
+                        wholesaleMediaMode === 'video'
+                          ? 'bg-emerald-600 text-white shadow-xs'
+                          : 'text-slate-600 hover:text-slate-900'
+                      }`}
+                    >
+                      <Video className="w-3.5 h-3.5" />
+                      <span>Live Godown Video</span>
+                    </button>
+                    <button
+                      onClick={() => setWholesaleMediaMode('photo')}
+                      className={`px-2.5 py-1 rounded-md text-[11px] font-bold transition-all cursor-pointer ${
+                        wholesaleMediaMode === 'photo'
+                          ? 'bg-emerald-600 text-white shadow-xs'
+                          : 'text-slate-600 hover:text-slate-900'
+                      }`}
+                    >
+                      <span>Yard Photo</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div className="relative aspect-16/9 rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-slate-950 group">
+                  {wholesaleMediaMode === 'video' ? (
+                    <div className="relative w-full h-full cursor-pointer" onClick={toggleVideoPlay}>
+                      <video
+                        ref={videoRef}
+                        src="/videos/vide1.mp4"
+                        className="w-full h-full object-cover"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                      />
+                      
+                      {/* Video Top Badges */}
+                      <div className="absolute top-2 left-2 right-2 flex items-center justify-between pointer-events-none z-10">
+                        <div className="bg-emerald-700/90 backdrop-blur-xs text-white text-[10px] font-bold px-2.5 py-1 rounded-md shadow-sm flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse" />
+                          <span>Warehouse Godown Tour (vide1)</span>
+                        </div>
+
+                        <div className="flex items-center gap-1 pointer-events-auto">
+                          <span className="bg-slate-950/80 text-amber-300 border border-amber-400/30 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-xs flex items-center gap-1">
+                            <VolumeX className="w-3 h-3 text-amber-400" />
+                            <span>Silent</span>
+                          </span>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setIsModalOpen(true);
+                            }}
+                            className="p-1.5 bg-slate-950/80 hover:bg-white hover:text-slate-950 text-white rounded cursor-pointer border border-white/20 transition-colors"
+                            title="Expand video"
+                          >
+                            <Maximize2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Play/Pause Overlay */}
+                      <div className={`absolute inset-0 flex items-center justify-center bg-slate-950/20 transition-opacity ${
+                        isVideoPlaying ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'
+                      }`}>
+                        <div className="w-12 h-12 rounded-full bg-emerald-500/90 text-slate-950 flex items-center justify-center shadow-lg">
+                          {isVideoPlaying ? <Pause className="w-5 h-5 fill-current" /> : <Play className="w-5 h-5 fill-current ml-0.5" />}
+                        </div>
+                      </div>
+
+                      {/* Video Bottom Info */}
+                      <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[10px] text-white pointer-events-none z-10 bg-black/50 px-2.5 py-1 rounded backdrop-blur-xs">
+                        <span>Plasto/Vectus Tanks • Crompton Fans • Pipes</span>
+                        <span className="font-mono font-bold text-emerald-300">1m 48s Walkthrough</span>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      <img
+                        src="/images/storefront/astral_tanks_sudhakar_yard.png"
+                        alt="Astral Water Tanks & Sudhakar Piping Bulk Yard"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute top-2 left-2 bg-emerald-700/90 backdrop-blur-xs text-white text-[10px] font-bold px-2.5 py-1 rounded-md">
+                        Astral &amp; Sudhakar Bulk Storage Yard
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
 
@@ -191,6 +298,62 @@ export const WholesaleRetailSection: React.FC<WholesaleRetailProps> = ({
         </div>
 
       </div>
+
+      {/* Godown Video Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-black/95 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="fixed inset-0" onClick={() => setIsModalOpen(false)} />
+
+          <div className="relative max-w-md w-full bg-slate-950 rounded-2xl border border-white/20 overflow-hidden z-10 shadow-2xl flex flex-col my-auto max-h-[95vh]">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-slate-900 text-white">
+              <div>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500 text-slate-950 uppercase">
+                  Wholesale Godown Walkthrough
+                </span>
+                <h4 className="text-sm font-bold text-white mt-1">
+                  Water Tanks, Bulk Pipes &amp; Fan Stocks
+                </h4>
+              </div>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="relative p-2 bg-black flex items-center justify-center max-h-[75vh]">
+              <video
+                src="/videos/vide1.mp4"
+                className="max-h-[70vh] w-auto rounded-lg object-contain"
+                autoPlay
+                controls
+                muted
+                playsInline
+                disableRemotePlayback
+                controlsList="nodownload nofullscreen noremoteplayback"
+                onVolumeChange={(e) => {
+                  e.currentTarget.muted = true;
+                  e.currentTarget.volume = 0;
+                }}
+              />
+            </div>
+
+            <div className="px-4 py-3 border-t border-white/10 bg-slate-900 flex items-center justify-between text-xs text-white">
+              <span className="text-slate-400 text-[11px]">
+                Vijaya Lakshmi Electricals • Wholesale Godown
+              </span>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="px-4 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 rounded-lg font-bold cursor-pointer"
+              >
+                Close Video
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </section>
   );
 };

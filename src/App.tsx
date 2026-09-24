@@ -82,7 +82,7 @@ export const App: React.FC = () => {
   return (
     <div className="min-h-screen w-full max-w-[100vw] overflow-x-hidden relative flex flex-col bg-white text-slate-900 selection:bg-lime-500 selection:text-white">
       
-      {/* 0. Cinematic Animated Intro Splash (Shop Name, Sparks & Colorful Energy) */}
+      {/* 0. Cinematic Intro (Crystal-Clear Night Entrance Walkthrough Video - vide4) */}
       <CinematicIntro
         isOpen={introOpen}
         onComplete={() => setIntroOpen(false)}
@@ -116,7 +116,7 @@ export const App: React.FC = () => {
         {/* 1.5 Authentic Shop Highlights Reel (Real In-Store Photos) */}
         <ShowroomHighlightsReel />
 
-        {/* 1.6 Showroom Video Tours (vid1 & vid2 9:16 Smartphone Walkthroughs) */}
+        {/* 1.6 Showroom & Godown Video Tours (vide4 Entrance, vide2 Counter, vide3 Sanitary/Cables, vide1 Wholesale Godown) */}
         <ShowroomVideoTours />
 
         {/* 2. Trust Metrics Bar */}
