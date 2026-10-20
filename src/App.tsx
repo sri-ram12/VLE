@@ -22,8 +22,39 @@ import { MobileActionBar } from './components/layout/MobileActionBar';
 import { ProductDetailsModal } from './components/products/ProductDetailsModal';
 import { EnquiryModal } from './components/store/EnquiryModal';
 import { AdminPreviewModal } from './components/admin/AdminPreviewModal';
+import { IS_MAINTENANCE_MODE, WEBSITE_DISABLED } from './config/maintenance';
+import { MaintenancePage } from './components/maintenance/MaintenancePage';
+import { ServerUnreachablePage } from './components/maintenance/ServerUnreachablePage';
 
 export const App: React.FC = () => {
+  // Maintenance bypass state
+  const [bypassedMaintenance, setBypassedMaintenance] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('preview') === 'live' || params.get('preview') === 'true' || params.get('bypass') === 'true') {
+        return true;
+      }
+      return sessionStorage.getItem('vle_maintenance_bypass') === 'true';
+    }
+    return false;
+  });
+
+  const handleBypassMaintenance = () => {
+    sessionStorage.setItem('vle_maintenance_bypass', 'true');
+    setBypassedMaintenance(true);
+  };
+
+  const handleRestoreMaintenanceScreen = () => {
+    sessionStorage.removeItem('vle_maintenance_bypass');
+    if (window.history.replaceState) {
+      const url = new URL(window.location.href);
+      url.searchParams.delete('preview');
+      url.searchParams.delete('bypass');
+      window.history.replaceState({}, '', url.pathname);
+    }
+    setBypassedMaintenance(false);
+  };
+
   // Navigation & Catalog filter state
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
@@ -79,8 +110,32 @@ export const App: React.FC = () => {
     }
   };
 
+  if (WEBSITE_DISABLED && !bypassedMaintenance) {
+    return <ServerUnreachablePage onBypass={handleBypassMaintenance} />;
+  }
+
+  if (IS_MAINTENANCE_MODE && !bypassedMaintenance) {
+    return <MaintenancePage onBypass={handleBypassMaintenance} />;
+  }
+
   return (
     <div className="min-h-screen w-full max-w-[100vw] overflow-x-hidden relative flex flex-col bg-white text-slate-900 selection:bg-lime-500 selection:text-white">
+      {/* Floating Developer/Staff Preview Mode Notification Banner */}
+      {(WEBSITE_DISABLED || IS_MAINTENANCE_MODE) && bypassedMaintenance && (
+        <div className="bg-amber-500 text-slate-950 font-semibold px-4 py-2 text-xs flex items-center justify-between shadow-lg sticky top-0 z-[100] border-b border-amber-600">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-slate-950 animate-ping" />
+            <span className="font-bold">Developer Preview Active:</span>
+            <span className="hidden sm:inline text-slate-900">The public only sees the blank white "Server unable to reach" error page.</span>
+          </div>
+          <button 
+            onClick={handleRestoreMaintenanceScreen}
+            className="px-3 py-1 bg-slate-950 hover:bg-slate-900 text-amber-400 rounded-lg text-xs font-bold cursor-pointer transition-all shadow-sm"
+          >
+            Exit Preview & Restore Error Page
+          </button>
+        </div>
+      )}
       
       {/* 0. Cinematic Intro (Crystal-Clear Night Entrance Walkthrough Video - vide4) */}
       <CinematicIntro
