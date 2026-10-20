@@ -6,7 +6,7 @@ import { AnimatedRunningBanner } from './components/layout/AnimatedRunningBanner
 import { CinematicIntro } from './components/intro/CinematicIntro';
 import { Hero } from './components/hero/Hero';
 import { ShowroomHighlightsReel } from './components/showroom/ShowroomHighlightsReel';
-import { ShowroomVideoTours } from './components/videodbdehdbhfdehjfghf ewf ewf ewefewfhefbeweh/ShowroomVideoTours';
+import { ShowroomVideoTours } from './components/video/ShowroomVideoTours';
 import { TrustBar } from './components/trust/TrustBar';
 import { CategorySection } from './components/categories/CategorySection';
 import { ProductCatalog } from './components/products/ProductCatalog';
